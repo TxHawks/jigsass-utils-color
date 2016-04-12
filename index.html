@@ -1,0 +1,619 @@
+<!doctype html>
+<title>jigsass-utils-color</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css?05" rel="stylesheet">
+<link href="jigsass-logo.png" rel="shortcut icon">
+<script type="text/javascript">WebFontConfig={google:{families:["Roboto:400,100,300,500:latin"]}},function(){var e=document.createElement("script");e.src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js",e.type="text/javascript",e.async="true";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script>
+<script>examples={"base":"","target":"_self","css":["assets/sg.css"],"js":[],"bodyjs":[],"htmlcss":"background:none;border:0;clip:auto;display:block;height:auto;margin:0;padding:0;position:static;width:auto","bodycss":"background:none;border:0;clip:auto;display:block;height:auto;margin:0;padding:0;position:static;width:auto"};</script>
+
+<header>
+	<nav>
+		<img src="jigsass-logo.png" alt="jigsass-utils-color">
+		
+	<ul>
+		
+				<li>
+					<a href="#color-utils"><span>Color Utils</span></a>
+					
+	<ul>
+		
+				<li>
+					<a href="#introduction"><span>Introduction</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--black"><span>color: u-c--black</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--blacktint-8"><span>color: u-c--black(tint-8)</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--primary"><span>color: u-c--primary</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--primaryhover"><span>color: u-c--primary:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--secondary"><span>color: u-c--secondary</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--secondaryhover"><span>color: u-c--secondary:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--tertiary"><span>color: u-c--tertiary</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--tertiaryhover"><span>color: u-c--tertiary:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--disabled"><span>color: u-c--disabled</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#color-u-c--disabledhover"><span>color: u-c--disabled:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--black"><span>background-color: u-bgc--black</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--blacktint-8"><span>background-color: u-bgc--black(tint-8)</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--primary"><span>background-color: u-bgc--primary</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--primaryhover"><span>background-color: u-bgc--primary:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--secondary"><span>background-color: u-bgc--secondary</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--secondaryhover"><span>background-color: u-bgc--secondary:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--tertiary"><span>background-color: u-bgc--tertiary</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--tertiaryhover"><span>background-color: u-bgc--tertiary:hover</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--disabled"><span>background-color: u-bgc--disabled</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#background-color-u-bgc--disabledhover"><span>background-color: u-bgc--disabled:hover</span></a>
+					
+				</li>
+				
+	</ul>
+	
+				</li>
+				
+	</ul>
+	
+	</nav>
+</header>
+
+<main>
+	
+		<section id="color-utils">
+			<h2>Color Utils</h2>
+			<div>
+				
+				
+		<section id="introduction">
+			<h3>Introduction</h3>
+			<div>
+				<p>A collection of dynamically generated <code>color</code> and <code>background-color</code> utility classes.</p>
+<p>JigSass Utils Color works in tandem with <a href="https://txhawks.github.io/jigsass-tools-color">JigSass Tools Color</a>
+and allows defining color and background-color classes based on the color palette defined in
+<a href="https://txhawks.github.io/jigsass-tools-color/#variable-jigsass-colors">$jigsass-colors</a> as well as
+adjusting them on the fly.</p>
+<p>Color utils can be limited to a certain state (i.e., <code>hover</code>, <code>focus</code>,  etc.)</p>
+<p>The syntax for generating a color util is: <code>$modifier: &#39;&lt;color-name&gt;[(&lt;adjustment-function&gt;-&lt;arg&gt;)][:state]&#39;</code></p>
+<p>Class names follow the <a href="http://docs.emmet.io/cheat-sheet/">Emmet</a> abbreviation
+syntax, with colons (&#39;:&#39;) replaced by two dashes (<code>--</code>) to follow BEM naming
+conventions.</p>
+<h4 id="available-classes">Available classes</h4>
+<ul>
+<li><code>u-c--&lt;color-name&gt;</code> (example: u-c--brand)</li>
+<li><code>u-c--&lt;color-name&gt;(&lt;adjustment-func&gt;-&lt;arg&gt;)</code> (example: u-c--brand(tint-2))</li>
+<li><code>u-c--&lt;color-name&gt;:&lt;state&gt;</code> (example: u-c--brand:focus)</li>
+<li><code>u-c--&lt;color-name&gt;(&lt;adjustment-func&gt;-&lt;arg&gt;):&lt;state&gt;</code> (example: u-c--brand(shade-20%):focus)</li>
+</ul>
+<ul>
+<li><code>u-bgc--&lt;color-name&gt;</code></li>
+<li><code>u-bgc--&lt;color-name&gt;(&lt;adjustment-func&gt;-&lt;arg&gt;)</code></li>
+<li><code>u-bgc--&lt;color-name&gt;:&lt;state&gt;</code></li>
+<li><code>u-bgc--&lt;color-name&gt;(&lt;adjustment-func&gt;-&lt;arg&gt;):&lt;state&gt;</code></li>
+</ul>
+<h4 id="installation">Installation</h4>
+<p>Using npm:</p>
+<pre><code class="lang-sh">npm i -S jigsass-utils-color
+</code></pre>
+<h4 id="usage">Usage</h4>
+<p>Import JigSass Utils Color into your main scss file near its very end, together with all
+other utilities (utilities should always be the last to be imported).</p>
+<pre><code class="lang-scss">@import &#39;path/to/jigsass-utils-color/scss/index&#39;;
+</code></pre>
+<p>Like all other JigSass Utils, JigSass Utils Color does not automatically generate any CSS
+when imported. You would need to explicitly indicate that each individual color
+class should actually be generated in each component or object it is used in
+(clarification: This will include style declarations inside <code>.foo</code> and .<code>bar</code>):</p>
+<pre><code class="lang-scss">// _c.foo.scss
+.foo {
+  @include jigsass-util(u-c, $modifier: primary); // &lt;-- color: #09a5d9
+
+  ...
+}
+</code></pre>
+<pre><code class="lang-scss">// _c.bar.scss
+.bar {
+  @include jigsass-util(u-c, $modifier: &#39;black(tint-10%)&#39;);  // &lt;-- color: #191919
+  @include jigsass-util(u-bgc, $modifier: &#39;white(shade-30%)&#39;, $from: large); // &lt;-- background-color: #b2b2b2 from large bp and on.
+
+  ...
+}
+</code></pre>
+<p>Doing so helps us a great deal with portability, as no matter where we import component or object
+partials, the correct utility classes will be generated. Think of it as a poor man&#39;s dependency
+management.</p>
+<p>Developer communication is also assisted by including &quot;dependencies&quot; wherever they are required,
+as anyone going through a partial, can easily understand how it should be marked up with just a
+glance.</p>
+<p>As far as bloat goes, just don&#39;t worry about it - the actual styles will only be generated once,
+at the location in the cascade where the Jigsass Utils Color partial was imported into the main file.</p>
+<p>JigSass Utils Color classes are responsive-enabled, using <a href="https://txhawks.github.io/jigsass-tools-mq/">JigSass MQ</a>
+and the breakpoints defined in the <a href="https://txhawks.github.io/jigsass-tools-mq/#variable-jigsass-breakpoints">$jigsass-breakpoints</a> variable.</p>
+<p>Based on the breakpoint arguments passed to <code>jigsass-util</code> when including a class,
+responsive modifiers are generated according to the following logic:</p>
+<pre><code class="lang-scss">.u-c-&lt;modifier&gt;[-[-from-&lt;breakpoint-name&gt;][-until-&lt;breakpoint-name&gt;][-misc-&lt;breakpoint-name&gt;]]
+.u-bgc-&lt;modifier&gt;[-[-from-&lt;breakpoint-name&gt;][-until-&lt;breakpoint-name&gt;][-misc-&lt;breakpoint-name&gt;]]
+</code></pre>
+<p>So, assuming the <code>medium</code>, <code>large</code> and <code>landscape</code> breakpoints are defined in <code>$jigsass-breakpoints</code>
+as <code>600px</code>, <code>1024px</code> and <code>(orientation: landscape)</code> respectively,</p>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: secondary);
+</code></pre>
+<p>will generate the <code>.u-c--secondary</code> class, which is not limited to any media-query.</p>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: primary, $until: medium);
+</code></pre>
+<p>will generate the <code>.u-bgc--primary--until-medium</code> class, which will be in effect at
+<code>(max-width: 37.49em)</code> and will override styles in the default class until that point.</p>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: primary, $from: large, $misc: landscape);
+</code></pre>
+<p>will generate the <code>.u-c--primary--from-large-when-landscape</code> class, which will go into
+effect at <code>(min-width: 64em) and (orientation: landscape)</code> and will override styles in the default
+class under these  conditions.</p>
+<p><strong>License:</strong> MIT</p>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--black">
+			<h3>color: u-c--black</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#000</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: black [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--black&#39;&gt;
+  This element&#39;s `color` is set to `#000`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--blacktint-8">
+			<h3>color: u-c--black(tint-8)</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#666666</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: black(tint-8) [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--black(tint-8)&#39;&gt;
+  This element&#39;s `color` is set to `#666666`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--primary">
+			<h3>color: u-c--primary</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#09a5d9</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: primary [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--primary&#39;&gt;
+  This element&#39;s `color` is set to `#09a5d9`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--primaryhover">
+			<h3>color: u-c--primary:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#09a5d9</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: primary:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--primary:hover&#39;&gt;
+  This element&#39;s `color` is set to `#09a5d9`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--secondary">
+			<h3>color: u-c--secondary</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#046380</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: secondary [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--secondary&#39;&gt;
+  This element&#39;s `color` is set to `#046380`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--secondaryhover">
+			<h3>color: u-c--secondary:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#046380</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: secondary:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--secondary:hover&#39;&gt;
+  This element&#39;s `color` is set to `#046380`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--tertiary">
+			<h3>color: u-c--tertiary</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#9f1626</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: tertiary [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--tertiary&#39;&gt;
+  This element&#39;s `color` is set to `#9f1626`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--tertiaryhover">
+			<h3>color: u-c--tertiary:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#9f1626</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: tertiary:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--tertiary:hover&#39;&gt;
+  This element&#39;s `color` is set to `#9f1626`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--disabled">
+			<h3>color: u-c--disabled</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#ccc</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: disabled [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--disabled&#39;&gt;
+  This element&#39;s `color` is set to `#ccc`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="color-u-c--disabledhover">
+			<h3>color: u-c--disabled:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>color</code> of an element to <code>#ccc</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-c, $modifier: disabled:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;u-c--disabled:hover&#39;&gt;
+  This element&#39;s `color` is set to `#ccc`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--black">
+			<h3>background-color: u-bgc--black</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#000</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: black [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--black&#39;&gt;
+  This element&#39;s `background-color` is set to `#000`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--blacktint-8">
+			<h3>background-color: u-bgc--black(tint-8)</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#666666</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: black(tint-8) [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--black(tint-8)&#39;&gt;
+  This element&#39;s `background-color` is set to `#666666`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--primary">
+			<h3>background-color: u-bgc--primary</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#09a5d9</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: primary [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--primary&#39;&gt;
+  This element&#39;s `background-color` is set to `#09a5d9`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--primaryhover">
+			<h3>background-color: u-bgc--primary:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#09a5d9</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: primary:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--primary:hover&#39;&gt;
+  This element&#39;s `background-color` is set to `#09a5d9`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--secondary">
+			<h3>background-color: u-bgc--secondary</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#046380</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: secondary [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--secondary&#39;&gt;
+  This element&#39;s `background-color` is set to `#046380`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--secondaryhover">
+			<h3>background-color: u-bgc--secondary:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#046380</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: secondary:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--secondary:hover&#39;&gt;
+  This element&#39;s `background-color` is set to `#046380`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--tertiary">
+			<h3>background-color: u-bgc--tertiary</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#9f1626</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: tertiary [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--tertiary&#39;&gt;
+  This element&#39;s `background-color` is set to `#9f1626`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--tertiaryhover">
+			<h3>background-color: u-bgc--tertiary:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#9f1626</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: tertiary:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--tertiary:hover&#39;&gt;
+  This element&#39;s `background-color` is set to `#9f1626`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--disabled">
+			<h3>background-color: u-bgc--disabled</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#ccc</code>
+.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: disabled [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--disabled&#39;&gt;
+  This element&#39;s `background-color` is set to `#ccc`
+  .
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="background-color-u-bgc--disabledhover">
+			<h3>background-color: u-bgc--disabled:hover</h3>
+			<div>
+				<p>A utility class for setting the <code>background-color</code> of an element to <code>#ccc</code>
+when  :hovered.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-bgc, $modifier: disabled:hover [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;p class=&#39;fpo u-bgc--disabled:hover&#39;&gt;
+  This element&#39;s `background-color` is set to `#ccc`
+  when  :hovered.
+&lt;/p&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+			</div>
+		</section>
+		
+	<footer>Last modified Tuesday, 12 April 2016 17:52</footer>
+</main>
+<script src="prism.js"></script>
+<script src="examples.js"></script>
+<script src="script.js"></script>
+

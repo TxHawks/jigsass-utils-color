@@ -1,0 +1,703 @@
+/* ---
+section: Color Utils
+title: Introduction
+order: -10
+---
+
+A collection of dynamically generated `color` and `background-color` utility classes.
+
+JigSass Utils Color works in tandem with [JigSass Tools Color](https://txhawks.github.io/jigsass-tools-color)
+and allows defining color and background-color classes based on the color palette defined in
+[$jigsass-colors](https://txhawks.github.io/jigsass-tools-color/#variable-jigsass-colors) as well as
+adjusting them on the fly.
+
+Color utils can be limited to a certain state (i.e., `hover`, `focus`,  etc.)
+
+The syntax for generating a color util is: `$modifier: '<color-name>[(<adjustment-function>-<arg>)][:state]'`
+
+Class names follow the [Emmet](http://docs.emmet.io/cheat-sheet/) abbreviation
+syntax, with colons (':') replaced by two dashes (`--`) to follow BEM naming
+conventions.
+
+#### Available classes
+
+  - `u-c--<color-name>` (example: u-c--brand)
+  - `u-c--<color-name>(<adjustment-func>-<arg>)` (example: u-c--brand(tint-2))
+  - `u-c--<color-name>:<state>` (example: u-c--brand:focus)
+  - `u-c--<color-name>(<adjustment-func>-<arg>):<state>` (example: u-c--brand(shade-20%):focus)
+
+
+  - `u-bgc--<color-name>`
+  - `u-bgc--<color-name>(<adjustment-func>-<arg>)`
+  - `u-bgc--<color-name>:<state>`
+  - `u-bgc--<color-name>(<adjustment-func>-<arg>):<state>`
+
+
+#### Installation
+
+Using npm:
+
+```sh
+npm i -S jigsass-utils-color
+```
+
+#### Usage
+
+Import JigSass Utils Color into your main scss file near its very end, together with all
+other utilities (utilities should always be the last to be imported).
+
+```scss
+@import 'path/to/jigsass-utils-color/scss/index';
+```
+
+Like all other JigSass Utils, JigSass Utils Color does not automatically generate any CSS
+when imported. You would need to explicitly indicate that each individual color
+class should actually be generated in each component or object it is used in
+(clarification: This will include style declarations inside `.foo` and .`bar`):
+
+```scss
+// _c.foo.scss
+.foo {
+  @include jigsass-util(u-c, $modifier: primary); // <-- color: #09a5d9
+
+  ...
+}
+```
+
+```scss
+// _c.bar.scss
+.bar {
+  @include jigsass-util(u-c, $modifier: 'black(tint-10%)');  // <-- color: #191919
+  @include jigsass-util(u-bgc, $modifier: 'white(shade-30%)', $from: large); // <-- background-color: #b2b2b2 from large bp and on.
+
+  ...
+}
+```
+
+Doing so helps us a great deal with portability, as no matter where we import component or object
+partials, the correct utility classes will be generated. Think of it as a poor man's dependency
+management.
+
+Developer communication is also assisted by including "dependencies" wherever they are required,
+as anyone going through a partial, can easily understand how it should be marked up with just a
+glance.
+
+As far as bloat goes, just don't worry about it - the actual styles will only be generated once,
+at the location in the cascade where the Jigsass Utils Color partial was imported into the main file.
+
+
+JigSass Utils Color classes are responsive-enabled, using [JigSass MQ](https://txhawks.github.io/jigsass-tools-mq/)
+and the breakpoints defined in the [$jigsass-breakpoints](https://txhawks.github.io/jigsass-tools-mq/#variable-jigsass-breakpoints) variable.
+
+Based on the breakpoint arguments passed to `jigsass-util` when including a class,
+responsive modifiers are generated according to the following logic:
+
+```scss
+.u-c-<modifier>[-[-from-<breakpoint-name>][-until-<breakpoint-name>][-misc-<breakpoint-name>]]
+.u-bgc-<modifier>[-[-from-<breakpoint-name>][-until-<breakpoint-name>][-misc-<breakpoint-name>]]
+```
+
+So, assuming the `medium`, `large` and `landscape` breakpoints are defined in `$jigsass-breakpoints`
+as `600px`, `1024px` and `(orientation: landscape)` respectively,
+
+```scss
+@include jigsass-util(u-c, $modifier: secondary);
+```
+will generate the `.u-c--secondary` class, which is not limited to any media-query.
+
+```scss
+@include jigsass-util(u-bgc, $modifier: primary, $until: medium);
+```
+
+will generate the `.u-bgc--primary--until-medium` class, which will be in effect at
+`(max-width: 37.49em)` and will override styles in the default class until that point.
+
+```scss
+@include jigsass-util(u-c, $modifier: primary, $from: large, $misc: landscape);
+```
+
+will generate the `.u-c--primary--from-large-when-landscape` class, which will go into
+effect at `(min-width: 64em) and (orientation: landscape)` and will override styles in the default
+class under these  conditions.
+
+
+**License:** MIT
+
+*/
+.u-c--black {
+  color: #000;
+  /* ---
+section: Color Utils
+title: color: u-c--black
+order: 1
+---
+A utility class for setting the `color` of an element to `#000`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: black [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--black'>
+  This element's `color` is set to `#000`
+  .
+</p>
+```
+*/
+}
+
+.u-c--black\(tint-8\) {
+  color: #666666;
+  /* ---
+section: Color Utils
+title: color: u-c--black(tint-8)
+order: 2
+---
+A utility class for setting the `color` of an element to `#666666`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: black(tint-8) [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--black(tint-8)'>
+  This element's `color` is set to `#666666`
+  .
+</p>
+```
+*/
+}
+
+.u-c--primary {
+  color: #09a5d9;
+  /* ---
+section: Color Utils
+title: color: u-c--primary
+order: 3
+---
+A utility class for setting the `color` of an element to `#09a5d9`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: primary [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--primary'>
+  This element's `color` is set to `#09a5d9`
+  .
+</p>
+```
+*/
+}
+
+.u-c--primary\:hover:hover {
+  color: #09a5d9;
+  /* ---
+section: Color Utils
+title: color: u-c--primary:hover
+order: 4
+---
+A utility class for setting the `color` of an element to `#09a5d9`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: primary:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--primary:hover'>
+  This element's `color` is set to `#09a5d9`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-c--secondary {
+  color: #046380;
+  /* ---
+section: Color Utils
+title: color: u-c--secondary
+order: 5
+---
+A utility class for setting the `color` of an element to `#046380`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: secondary [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--secondary'>
+  This element's `color` is set to `#046380`
+  .
+</p>
+```
+*/
+}
+
+.u-c--secondary\:hover:hover {
+  color: #046380;
+  /* ---
+section: Color Utils
+title: color: u-c--secondary:hover
+order: 6
+---
+A utility class for setting the `color` of an element to `#046380`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: secondary:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--secondary:hover'>
+  This element's `color` is set to `#046380`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-c--tertiary {
+  color: #9f1626;
+  /* ---
+section: Color Utils
+title: color: u-c--tertiary
+order: 7
+---
+A utility class for setting the `color` of an element to `#9f1626`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: tertiary [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--tertiary'>
+  This element's `color` is set to `#9f1626`
+  .
+</p>
+```
+*/
+}
+
+.u-c--tertiary\:hover:hover {
+  color: #9f1626;
+  /* ---
+section: Color Utils
+title: color: u-c--tertiary:hover
+order: 8
+---
+A utility class for setting the `color` of an element to `#9f1626`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: tertiary:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--tertiary:hover'>
+  This element's `color` is set to `#9f1626`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-c--disabled {
+  color: #ccc;
+  /* ---
+section: Color Utils
+title: color: u-c--disabled
+order: 9
+---
+A utility class for setting the `color` of an element to `#ccc`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: disabled [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--disabled'>
+  This element's `color` is set to `#ccc`
+  .
+</p>
+```
+*/
+}
+
+.u-c--disabled\:hover:hover {
+  color: #ccc;
+  /* ---
+section: Color Utils
+title: color: u-c--disabled:hover
+order: 10
+---
+A utility class for setting the `color` of an element to `#ccc`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-c, $modifier: disabled:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='u-c--disabled:hover'>
+  This element's `color` is set to `#ccc`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-bgc--black {
+  background-color: #000;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--black
+order: 111
+---
+A utility class for setting the `background-color` of an element to `#000`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: black [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--black'>
+  This element's `background-color` is set to `#000`
+  .
+</p>
+```
+*/
+}
+
+.u-bgc--black\(tint-8\) {
+  background-color: #666666;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--black(tint-8)
+order: 112
+---
+A utility class for setting the `background-color` of an element to `#666666`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: black(tint-8) [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--black(tint-8)'>
+  This element's `background-color` is set to `#666666`
+  .
+</p>
+```
+*/
+}
+
+.u-bgc--primary {
+  background-color: #09a5d9;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--primary
+order: 113
+---
+A utility class for setting the `background-color` of an element to `#09a5d9`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: primary [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--primary'>
+  This element's `background-color` is set to `#09a5d9`
+  .
+</p>
+```
+*/
+}
+
+.u-bgc--primary\:hover:hover {
+  background-color: #09a5d9;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--primary:hover
+order: 114
+---
+A utility class for setting the `background-color` of an element to `#09a5d9`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: primary:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--primary:hover'>
+  This element's `background-color` is set to `#09a5d9`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-bgc--secondary {
+  background-color: #046380;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--secondary
+order: 115
+---
+A utility class for setting the `background-color` of an element to `#046380`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: secondary [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--secondary'>
+  This element's `background-color` is set to `#046380`
+  .
+</p>
+```
+*/
+}
+
+.u-bgc--secondary\:hover:hover {
+  background-color: #046380;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--secondary:hover
+order: 116
+---
+A utility class for setting the `background-color` of an element to `#046380`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: secondary:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--secondary:hover'>
+  This element's `background-color` is set to `#046380`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-bgc--tertiary {
+  background-color: #9f1626;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--tertiary
+order: 117
+---
+A utility class for setting the `background-color` of an element to `#9f1626`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: tertiary [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--tertiary'>
+  This element's `background-color` is set to `#9f1626`
+  .
+</p>
+```
+*/
+}
+
+.u-bgc--tertiary\:hover:hover {
+  background-color: #9f1626;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--tertiary:hover
+order: 118
+---
+A utility class for setting the `background-color` of an element to `#9f1626`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: tertiary:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--tertiary:hover'>
+  This element's `background-color` is set to `#9f1626`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+.u-bgc--disabled {
+  background-color: #ccc;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--disabled
+order: 119
+---
+A utility class for setting the `background-color` of an element to `#ccc`
+.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: disabled [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--disabled'>
+  This element's `background-color` is set to `#ccc`
+  .
+</p>
+```
+*/
+}
+
+.u-bgc--disabled\:hover:hover {
+  background-color: #ccc;
+  /* ---
+section: Color Utils
+title: background-color: u-bgc--disabled:hover
+order: 120
+---
+A utility class for setting the `background-color` of an element to `#ccc`
+when  :hovered.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-bgc, $modifier: disabled:hover [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='fpo u-bgc--disabled:hover'>
+  This element's `background-color` is set to `#ccc`
+  when  :hovered.
+</p>
+```
+*/
+}
+
+html {
+  font-size: 37.5%;
+}
+
+body {
+  font-size: 2.6666666667em;
+  line-height: 4rem;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 !important;
+}
+
+.fpo {
+  padding: 1rem;
+}
+
+.fpo--pale {
+  color: #333;
+}
+
+figure,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
