@@ -1,0 +1,121 @@
+// *************************************
+//
+// # jigsass-utils-color style guide generator
+// -> It is a best practice for JigSass modules to
+//    not automatically generate css and documentation
+//    on `@import`. Please use this file to enable css
+//    (and comments) generation.
+//
+//    Files in `sgSrc/assets` will be available
+//    for use in the style guide
+//
+// *************************************
+
+// *************************************
+//
+// # jigsass-utils-text style guide generator
+// -> It is a best practice for JigSass modules to
+//    not automatically generate css and documentation
+//    on `@import`. Please use this file to enable css
+//    (and comments) generation.
+//
+//    Files in `sgSrc/assets` will be available
+//    for use in the style guide
+//
+// *************************************
+
+@charset 'UTF-8';
+
+// --------------------
+// Dependencies
+// --------------------
+@import '../node_modules/jigsass-tools-maps/scss/index';
+@import '../node_modules/jigsass-tools-mq/scss/index';
+@import '../node_modules/jigsass-tools-typography/scss/index';
+@import '../node_modules/jigsass-tools-strings/scss/index';
+@import '../node_modules/jigsass-tools-bidi/scss/index';
+@import '../node_modules/jigsass-tools-selectors/scss/index';
+@import '../node_modules/jigsass-tools-color/scss/index';
+
+
+
+
+
+// --------------------
+// Styles
+// --------------------
+
+$jigsass-colors: (
+	'black': #000,
+  primary: #09a5d9,
+  secondary: #046380,
+  tertiary: #9f1626,
+  disabled: #ccc,
+);
+
+@include jigsass-util(u-c, $modifier: 'black');
+@include jigsass-util(u-c, $modifier: 'black(tint-8)');
+@include jigsass-util(u-bgc, $modifier: 'black');
+@include jigsass-util(u-bgc, $modifier: 'black(tint-8)');
+
+@include jigsass-util(u-c, $modifier: 'primary');
+@include jigsass-util(u-c, $modifier: 'primary:hover');
+@include jigsass-util(u-bgc, $modifier: 'primary');
+@include jigsass-util(u-bgc, $modifier: 'primary:hover');
+
+@include jigsass-util(u-c, $modifier: 'secondary');
+@include jigsass-util(u-c, $modifier: 'secondary:hover');
+@include jigsass-util(u-bgc, $modifier: 'secondary');
+@include jigsass-util(u-bgc, $modifier: 'secondary:hover');
+
+@include jigsass-util(u-c, $modifier: 'tertiary');
+@include jigsass-util(u-c, $modifier: 'tertiary:hover');
+@include jigsass-util(u-bgc, $modifier: 'tertiary');
+@include jigsass-util(u-bgc, $modifier: 'tertiary:hover');
+
+@include jigsass-util(u-c, $modifier: 'disabled');
+@include jigsass-util(u-c, $modifier: 'disabled:hover');
+@include jigsass-util(u-bgc, $modifier: 'disabled');
+@include jigsass-util(u-bgc, $modifier: 'disabled:hover');
+
+
+@import 'index.scss';
+
+
+
+// --------------------
+// Demo Styles
+// --------------------
+
+$jigsass-mdcss-brand-color: #09a5d9;
+@include jigsass-set-baseline;
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 !important;
+}
+
+.fpo {
+   padding: 1rem;
+}
+
+.fpo--pale {
+  color: #333;
+}
+
+figure,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+

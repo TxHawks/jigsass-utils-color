@@ -1,0 +1,304 @@
+// *************************************
+//
+// # jigsass-utils-color
+// -> color-related utility classes
+//
+// Author: TxHawks (tofu.hawks@gmail.com)
+// https://txhawks.github.io/jigsass-utils-color
+//
+// *************************************
+
+@charset 'UTF-8';
+
+
+// -------------------------------------
+// Dependencies
+// -------------------------------------
+
+@if (not mixin-exists(jigsass-define-util)) {
+  @error '`jigsass-utils-color` has a dependency on `jigsass-tools-selectors`. ' +
+    'Please import it before this file.';
+}
+@if (not function-exists(jigsass-color)) {
+  @error '`jigsass-utils-color` has a dependency on `jigsass-tools-color`. ' +
+    'Please import it before this file.';
+}
+
+
+
+
+
+// -------------------------------------
+// Introduction
+// -------------------------------------
+
+// stylelint-disable
+/* ---
+section: Color Utils
+title: Introduction
+order: -10
+---
+
+A collection of dynamically generated `color` and `background-color` utility classes.
+
+JigSass Utils Color works in tandem with [JigSass Tools Color](https://txhawks.github.io/jigsass-tools-color)
+and allows defining color and background-color classes based on the color palette defined in
+[$jigsass-colors](https://txhawks.github.io/jigsass-tools-color/#variable-jigsass-colors) as well as
+adjusting them on the fly.
+
+Color utils can be limited to a certain state (i.e., `hover`, `focus`,  etc.)
+
+The syntax for generating a color util is: `$modifier: '<color-name>[(<adjustment-function>-<arg>)][:state]'`
+
+Class names follow the [Emmet](http://docs.emmet.io/cheat-sheet/) abbreviation
+syntax, with colons (':') replaced by two dashes (`--`) to follow BEM naming
+conventions.
+
+#### Available classes
+
+  - `u-c--<color-name>` (example: u-c--brand)
+  - `u-c--<color-name>(<adjustment-func>-<arg>)` (example: u-c--brand(tint-2))
+  - `u-c--<color-name>:<state>` (example: u-c--brand:focus)
+  - `u-c--<color-name>(<adjustment-func>-<arg>):<state>` (example: u-c--brand(shade-20%):focus)
+
+
+  - `u-bgc--<color-name>`
+  - `u-bgc--<color-name>(<adjustment-func>-<arg>)`
+  - `u-bgc--<color-name>:<state>`
+  - `u-bgc--<color-name>(<adjustment-func>-<arg>):<state>`
+
+
+#### Installation
+
+Using npm:
+
+```sh
+npm i -S jigsass-utils-color
+```
+
+#### Usage
+
+Import JigSass Utils Color into your main scss file near its very end, together with all
+other utilities (utilities should always be the last to be imported).
+
+```scss
+@import 'path/to/jigsass-utils-color/scss/index';
+```
+
+Like all other JigSass Utils, JigSass Utils Color does not automatically generate any CSS
+when imported. You would need to explicitly indicate that each individual color
+class should actually be generated in each component or object it is used in
+(clarification: This will include style declarations inside `.foo` and .`bar`):
+
+```scss
+// _c.foo.scss
+.foo {
+  @include jigsass-util(u-c, $modifier: primary); // <-- color: #09a5d9
+
+  ...
+}
+```
+
+```scss
+// _c.bar.scss
+.bar {
+  @include jigsass-util(u-c, $modifier: 'black(tint-10%)');  // <-- color: #191919
+  @include jigsass-util(u-bgc, $modifier: 'white(shade-30%)', $from: large); // <-- background-color: #b2b2b2 from large bp and on.
+
+  ...
+}
+```
+
+Doing so helps us a great deal with portability, as no matter where we import component or object
+partials, the correct utility classes will be generated. Think of it as a poor man's dependency
+management.
+
+Developer communication is also assisted by including "dependencies" wherever they are required,
+as anyone going through a partial, can easily understand how it should be marked up with just a
+glance.
+
+As far as bloat goes, just don't worry about it - the actual styles will only be generated once,
+at the location in the cascade where the Jigsass Utils Color partial was imported into the main file.
+
+
+JigSass Utils Color classes are responsive-enabled, using [JigSass MQ](https://txhawks.github.io/jigsass-tools-mq/)
+and the breakpoints defined in the [$jigsass-breakpoints](https://txhawks.github.io/jigsass-tools-mq/#variable-jigsass-breakpoints) variable.
+
+Based on the breakpoint arguments passed to `jigsass-util` when including a class,
+responsive modifiers are generated according to the following logic:
+
+```scss
+.u-c-<modifier>[-[-from-<breakpoint-name>][-until-<breakpoint-name>][-misc-<breakpoint-name>]]
+.u-bgc-<modifier>[-[-from-<breakpoint-name>][-until-<breakpoint-name>][-misc-<breakpoint-name>]]
+```
+
+So, assuming the `medium`, `large` and `landscape` breakpoints are defined in `$jigsass-breakpoints`
+as `600px`, `1024px` and `(orientation: landscape)` respectively,
+
+```scss
+@include jigsass-util(u-c, $modifier: secondary);
+```
+will generate the `.u-c--secondary` class, which is not limited to any media-query.
+
+```scss
+@include jigsass-util(u-bgc, $modifier: primary, $until: medium);
+```
+
+will generate the `.u-bgc--primary--until-medium` class, which will be in effect at
+`(max-width: 37.49em)` and will override styles in the default class until that point.
+
+```scss
+@include jigsass-util(u-c, $modifier: primary, $from: large, $misc: landscape);
+```
+
+will generate the `.u-c--primary--from-large-when-landscape` class, which will go into
+effect at `(min-width: 64em) and (orientation: landscape)` and will override styles in the default
+class under these  conditions.
+
+
+**License:** MIT
+
+*/
+// stylelint-enable
+
+
+
+
+
+// -------------------------------------
+// Variables
+// -------------------------------------
+
+// Used internally to store doclets
+$_doclet-store: () !default;
+
+// Used internally to ordering doclets
+$_jigsass-util-color-i: 1;
+
+
+
+
+
+// -------------------------------------
+// Definitions
+// -------------------------------------
+
+@each $util in u-c u-bgc {
+  @include jigsass-define-util($util) {
+    @if (not $jigsass-util-modifier) {
+      @error 'jigsass-utils-color: #{$jigsass-util-name} must be passed A ' +
+        'value through a modifier.';
+    }
+
+    $parsed-mod-values: jigsass-parse-modifier($jigsass-util-modifier);
+
+    $color-name: map-get($parsed-mod-values, modifier);
+    $args: map-get($parsed-mod-values, args);
+    $state: map-get($parsed-mod-values, state);
+    $prop: if(str-slice($jigsass-util-name, 3) == c, color, background-color);
+
+    @if ($args and length($args) > 1) {
+      $arglist: ();
+      @for $i from 2 through length($args) {
+        $arglist: append($arglist, nth($args, $i));
+      }
+      $args: (nth($args, 1) : $arglist);
+    }
+
+    $color: if($args, append($color-name, $args), $color-name);
+    $color: jigsass-color($color);
+
+    // stylelint-disable selector-no-id
+    &#{unquote($state or '')} {
+      // stylelint-enable
+
+      #{$prop}: $color;
+
+      $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+      @if (not index($_doclet-store, $_doclet)) {
+        $_doclet-store: append($_doclet-store, $_doclet) !global;
+        // stylelint-disable
+/* ---
+section: Color Utils
+title: #{$prop}: #{$jigsass-util-name}--#{$jigsass-util-modifier}
+order: #{$_jigsass-util-color-i + if($prop == color, 0, 100)}
+---
+A utility class for setting the `#{$prop}` of an element to `#{$color}`
+#{if($state, 'when ' + if($state == active, ' active', ' ' + $state + 'ed.'), '.')}
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+
+```example:html
+<p class='#{if($prop == color,'', 'fpo ')}#{$jigsass-util-name}--#{$jigsass-util-modifier}'>
+  This element's `#{$prop}` is set to `#{$color}`
+  #{if($state, 'when ' + if($state == active, ' active', ' ' + $state + 'ed.'), '.')}
+</p>
+```
+*/
+        $_jigsass-util-color-i: $_jigsass-util-color-i + 1 !global;
+        // stylelint-enable
+      }
+    }
+  }
+}
+
+
+
+
+
+// -------------------------------------
+// Mixins
+// -------------------------------------
+
+//
+
+
+
+
+
+// -------------------------------------
+// Modifiers
+// -------------------------------------
+
+//
+
+
+
+
+
+// -------------------------------------
+// Items
+// -------------------------------------
+
+//
+
+
+
+
+
+// -------------------------------------
+// States
+// -------------------------------------
+
+//
+
+
+
+
+
+// -------------------------------------
+// Context
+// -------------------------------------
+
+//
+
+
+
+
+
