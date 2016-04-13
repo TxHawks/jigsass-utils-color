@@ -54,9 +54,9 @@ $jigsass-colors: (
 );
 
 @include jigsass-util(u-c, $modifier: 'black');
-@include jigsass-util(u-c, $modifier: 'black(tint-8)');
+@include jigsass-util(u-c, $modifier: 'black(tint,8)');
 @include jigsass-util(u-bgc, $modifier: 'black');
-@include jigsass-util(u-bgc, $modifier: 'black(tint-8)');
+@include jigsass-util(u-bgc, $modifier: 'black(tint,8)');
 
 @include jigsass-util(u-c, $modifier: 'primary');
 @include jigsass-util(u-c, $modifier: 'primary:hover');

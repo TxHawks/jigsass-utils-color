@@ -48,7 +48,7 @@ adjusting them on the fly.
 
 Color utils can be limited to a certain state (i.e., `hover`, `focus`,  etc.)
 
-The syntax for generating a color util is: `$modifier: '<color-name>[(<adjustment-function>-<arg>)][:state]'`
+The syntax for generating a color util is: `$modifier: '<color-name>[(<adjustment-function>,<arg>)][:state]'`
 
 Class names follow the [Emmet](http://docs.emmet.io/cheat-sheet/) abbreviation
 syntax, with colons (':') replaced by two dashes (`--`) to follow BEM naming
@@ -57,15 +57,15 @@ conventions.
 #### Available classes
 
   - `u-c--<color-name>` (example: u-c--brand)
-  - `u-c--<color-name>(<adjustment-func>-<arg>)` (example: u-c--brand(tint-2))
+  - `u-c--<color-name>(<adjustment-func>,<arg>)` (example: u-c--brand(tint-2))
   - `u-c--<color-name>:<state>` (example: u-c--brand:focus)
-  - `u-c--<color-name>(<adjustment-func>-<arg>):<state>` (example: u-c--brand(shade-20%):focus)
+  - `u-c--<color-name>(<adjustment-func>,<arg>):<state>` (example: u-c--brand(shade-20%):focus)
 
 
   - `u-bgc--<color-name>`
-  - `u-bgc--<color-name>(<adjustment-func>-<arg>)`
+  - `u-bgc--<color-name>(<adjustment-func>,<arg>)`
   - `u-bgc--<color-name>:<state>`
-  - `u-bgc--<color-name>(<adjustment-func>-<arg>):<state>`
+  - `u-bgc--<color-name>(<adjustment-func>,<arg>):<state>`
 
 
 #### Installation
@@ -102,8 +102,8 @@ class should actually be generated in each component or object it is used in
 ```scss
 // _c.bar.scss
 .bar {
-  @include jigsass-util(u-c, $modifier: 'black(tint-10%)');  // <-- color: #191919
-  @include jigsass-util(u-bgc, $modifier: 'white(shade-30%)', $from: large); // <-- background-color: #b2b2b2 from large bp and on.
+  @include jigsass-util(u-c, $modifier: 'black(tint,10%)');  // <-- color: #191919
+  @include jigsass-util(u-bgc, $modifier: 'white(shade,30%)', $from: large); // <-- background-color: #b2b2b2 from large bp and on.
 
   ...
 }
@@ -209,7 +209,7 @@ $_jigsass-util-color-i: 1;
     $color: jigsass-color($color);
 
     // stylelint-disable selector-no-id
-    &#{unquote($state or '')} {
+    &#{$state or ''} {
       // stylelint-enable
 
       #{$prop}: $color;
