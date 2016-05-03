@@ -124,7 +124,7 @@ class under these  conditions.
 **License:** MIT
 
 */
-.u-c--black"" {
+.u-c--black {
   color: #000;
   /* ---
 section: Color Utils
@@ -151,7 +151,7 @@ A utility class for setting the `color` of an element to `#000`
 */
 }
 
-.u-c--black\(jigsass-tint\,8\)"" {
+.u-c--black\(jigsass-tint\,8\) {
   color: #666666;
   /* ---
 section: Color Utils
@@ -178,7 +178,7 @@ A utility class for setting the `color` of an element to `#666666`
 */
 }
 
-.u-c--primary"" {
+.u-c--primary {
   color: #09a5d9;
   /* ---
 section: Color Utils
@@ -232,7 +232,7 @@ when  :hovered.
 */
 }
 
-.u-c--secondary"" {
+.u-c--secondary {
   color: #046380;
   /* ---
 section: Color Utils
@@ -286,7 +286,7 @@ when  :hovered.
 */
 }
 
-.u-c--tertiary"" {
+.u-c--tertiary {
   color: #9f1626;
   /* ---
 section: Color Utils
@@ -340,7 +340,7 @@ when  :hovered.
 */
 }
 
-.u-c--disabled"" {
+.u-c--disabled {
   color: #ccc;
   /* ---
 section: Color Utils
@@ -394,7 +394,7 @@ when  :hovered.
 */
 }
 
-.u-bgc--black"" {
+.u-bgc--black {
   background-color: #000;
   /* ---
 section: Color Utils
@@ -421,7 +421,7 @@ A utility class for setting the `background-color` of an element to `#000`
 */
 }
 
-.u-bgc--black\(jigsass-tint\,8\)"" {
+.u-bgc--black\(jigsass-tint\,8\) {
   background-color: #666666;
   /* ---
 section: Color Utils
@@ -448,7 +448,7 @@ A utility class for setting the `background-color` of an element to `#666666`
 */
 }
 
-.u-bgc--primary"" {
+.u-bgc--primary {
   background-color: #09a5d9;
   /* ---
 section: Color Utils
@@ -502,7 +502,7 @@ when  :hovered.
 */
 }
 
-.u-bgc--secondary"" {
+.u-bgc--secondary {
   background-color: #046380;
   /* ---
 section: Color Utils
@@ -556,7 +556,7 @@ when  :hovered.
 */
 }
 
-.u-bgc--tertiary"" {
+.u-bgc--tertiary {
   background-color: #9f1626;
   /* ---
 section: Color Utils
@@ -610,7 +610,7 @@ when  :hovered.
 */
 }
 
-.u-bgc--disabled"" {
+.u-bgc--disabled {
   background-color: #ccc;
   /* ---
 section: Color Utils

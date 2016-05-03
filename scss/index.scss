@@ -209,7 +209,7 @@ $_jigsass-util-color-i: 1;
     $color: jigsass-color($color);
 
     // stylelint-disable selector-no-id
-    &#{$state or ''} {
+    &#{unquote($state or '')} {
       // stylelint-enable
 
       #{$prop}: $color;
